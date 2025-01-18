@@ -77,6 +77,7 @@ body
     width: 100%;
     background-color: var(--body-bgcolor);
     position: relative;
+    overflow-y: scroll;
 }
 
 /* STLYING */
@@ -187,6 +188,25 @@ header > .control,
 .control-panel > img
 {
     margin-left: auto;
+}
+
+
+main
+{
+    width: 100%;
+    overflow: auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit , clamp(200px , 1fr , 300px));
+    grid-template-rows: repeat(auto-fit , 400px);
+    grid-auto-flow: row;
+    grid-auto-rows: 400px;
+    gap: 24px;
+}
+
+main > div
+{
+    background-color: white;
 }
 
 

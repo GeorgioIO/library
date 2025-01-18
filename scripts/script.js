@@ -16,9 +16,17 @@ closePanel.addEventListener("click" , (event) => {
 
 const myLibrary = [];
 
-function Book()
+function Book(title , author , pages , readState)
 {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readState = readState;
+}
 
+Book.prototype.toggleState = function()
+{
+    this.readState = true
 }
 
 function addBookToLibrary()

@@ -51,5 +51,32 @@
         
 
     </main>
+    <form>
+        <div class="header">
+            <h2>Book Details</h2>
+        </div>
+        <div style="margin-top: 50px;" class="value">
+            <label for="title">Title</label>
+            <input type="text" name="bookTitle" id="title" required>
+            <span>required*</span>
+        </div>
+        <div class="value">
+            <label for="author">Author</label>
+            <input type="text" name="bookAuthor" id="author">
+        </div>
+        <div class="value">
+            <label for="numOfPages">Number of pages</label>
+            <input type="number" name="bookPages" id="numOfPages" min="0" required>
+        </div>
+        <div class="checkbox">
+            <label for="">Did you read it :</label>
+            <input type="radio" name="readState" id="yesRd" value="yes">
+            <label for="yesRd">Yes</label>
+            <input type="radio" name="readState" id="noRd" value="no">
+            <label for="noRd">No</label>
+        </div>
+        <button>Add</button>
+        <button>Cancel</button>
+    </form>
 </body>
 </html>

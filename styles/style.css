@@ -56,6 +56,19 @@
     }
 }
 
+@keyframes rotate
+{
+    0%
+    {
+        transform: rotate(0);
+    }
+
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+
 .slidePanelIN
 {
     animation: slidePanelIN ease-in-out 700ms forwards;
@@ -195,9 +208,9 @@ main
 {
     width: 100%;
     overflow: auto;
-    padding: 10px;
+    padding: 30px;
     display: grid;
-    grid-template-columns: repeat(auto-fit , clamp(200px , 1fr , 300px));
+    grid-template-columns: repeat(auto-fit , 300px);
     grid-template-rows: repeat(auto-fit , 400px);
     grid-auto-flow: row;
     grid-auto-rows: 400px;
@@ -209,6 +222,68 @@ main > div
     background-color: white;
 }
 
+main > .add{
+    --outline : #FFFFFF;
+    --bgcolor : transparent;
+    background-color: var(--bgcolor);
+    border-radius: .9rem;
+    border: 5px solid var(--outline);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--general-font);
+    cursor: pointer;
+    transition: all ease-in 400ms;
+}
+
+main > .add:hover{
+    transform: scale(1.03);
+}
+
+
+main > .add > .plus
+{
+    --bordercolor : #FFFFFF ;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 5px solid var(--bordercolor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+main > .add:hover .plus{
+    animation: rotate 500ms ease-in-out forwards;
+}
+
+.plus > .x
+{
+    width: 5px;
+    height: 70%;
+    background-color: #FFFFFF;
+    border-radius: .55rem;
+    position: absolute;
+}
+
+.plus > .y
+{
+    width: 70%;
+    height: 5px;
+    border-radius: .55rem;
+    background-color: #FFFFFF;
+
+}
+
+main > .add > p
+{
+    --fontcolor : #FFFFFF;
+    color: var(--fontcolor);
+    font-size: 20px;
+}
 
 
 

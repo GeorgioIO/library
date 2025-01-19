@@ -14,7 +14,7 @@
             <h1>Library</h1>
         </div>
         <div class="control">
-            <div class="add">
+            <div class="add showForm">
                 Add
                 <img src="./images/plus-svgrepo-com.svg" alt="plusicon">
             </div>
@@ -30,7 +30,7 @@
         </div>
     </header>
     <div class="control-panel">
-        <div class="add">
+        <div class="add showForm">
             Add
             <img src="./images/plus-svgrepo-com.svg" alt="plusicon">
         </div>
@@ -41,7 +41,7 @@
         <img id="closeControlPanel" src="./images/close-svgrepo-com.svg" alt="closeicon">
     </div>
     <main>
-        <button class="add">
+        <button class="add showForm">
             <div class="plus">
                 <div class="x"></div>
                 <div class="y"></div>
@@ -75,8 +75,10 @@
             <input type="radio" name="readState" id="noRd" value="no">
             <label for="noRd">No</label>
         </div>
-        <button>Add</button>
-        <button>Cancel</button>
+        <div class="buttons-container">
+            <button id="addBookButton">Add</button>
+            <button id="cancelButton">Cancel</button>
+        </div>
     </form>
 </body>
 </html>

@@ -14,23 +14,45 @@
 {
     --body-bgcolor : rgb(109, 26, 26);
     --ctrpanel-bgcolor : #FFFFFF;
-
+    --logo-bgcolor : #FFFFFF;
     --header-botbordercolor : #FFFFFF;
-
+    --burgerlines-bgcolor : #FFFFFF;
     --control-btn-bgcolor : #FFFFFF;
     --control-btn-fontcolor : rgb(109, 26, 26);
 
     --ctrpanel-btn-bgcolor : rgb(109, 26, 26);
     --ctrpanel-btn-fontcolor : #FFFFFF;
-
+    --themepanel-bgcolor : #FFFFFF;
+    --themepanel-fontcolor : rgb(109, 26, 26);
+    --themepanel-bordercolor : #FFFFFF;
     --logo-fontcolor : #FFFFFF;
-    
+    --new-fontcolor : #FFFFFF;
     --general-font : "Signika", serif;
+    --book-outline : #FFFFFF;
+    --plus-bordercolor : #FFFFFF ;
 }
 
 .light-mode
 {
     --body-bgcolor : #FFFFFF;
+    --book-outline : rgb(109, 26, 26);
+    --ctrpanel-bgcolor : rgb(109, 26, 26);
+    --logo-bgcolor : rgb(109, 26, 26);
+    --burgerlines-bgcolor : rgb(109, 26, 26);
+    --header-botbordercolor : rgb(109, 26, 26);
+
+    --control-btn-bgcolor : #FFFFFF;
+    --control-btn-fontcolor : rgb(109, 26, 26);
+    --themepanel-bgcolor : #FFFFFF;
+    --themepanel-fontcolor : rgb(109, 26, 26);
+    --themepanel-bordercolor : rgb(109, 26, 26);
+    --ctrpanel-btn-bgcolor : #FFFFFF;
+    --ctrpanel-btn-fontcolor : rgb(109, 26, 26);
+    --new-fontcolor : rgb(109, 26, 26);
+    --logo-fontcolor : rgb(109, 26, 26);
+    --plus-bordercolor : rgb(109, 26, 26) ;
+    
+    --general-font : "Signika", serif;
 }
 /* ANIMATIONS */
 
@@ -141,6 +163,11 @@ header > .logo
     gap: 8px;
 }
 
+.logo > svg
+{
+    fill: var(--logo-bgcolor);
+}
+
 header > .logo h1
 {
     font-family: var(--general-font);
@@ -215,7 +242,7 @@ header > .control,
     width: 80%;
     height: 4px;
     border-radius: 3px;
-    background-color: #FFFFFF;
+    background-color: var(--burgerlines-bgcolor);
 }
 
 .control-panel
@@ -309,11 +336,10 @@ main > .book
 }
 
 main > .add{
-    --outline : #FFFFFF;
     --bgcolor : transparent;
     background-color: var(--bgcolor);
     border-radius: .9rem;
-    border: 5px solid var(--outline);
+    border: 5px solid var(--book-outline);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -331,11 +357,11 @@ main > .add:hover{
 
 main > .add > .plus
 {
-    --bordercolor : #FFFFFF ;
+    
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 5px solid var(--bordercolor);
+    border: 5px solid var(--plus-bordercolor);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -350,7 +376,7 @@ main > .add:hover .plus{
 {
     width: 5px;
     height: 70%;
-    background-color: #FFFFFF;
+    background-color: var(--plus-bordercolor);
     border-radius: .55rem;
     position: absolute;
 }
@@ -360,14 +386,14 @@ main > .add:hover .plus{
     width: 70%;
     height: 5px;
     border-radius: .55rem;
-    background-color: #FFFFFF;
+    background-color: var(--plus-bordercolor);
 
 }
 
 main > .add > p
 {
-    --fontcolor : #FFFFFF;
-    color: var(--fontcolor);
+    
+    color: var(--new-fontcolor);
     font-size: 20px;
 }
 
@@ -491,10 +517,10 @@ form > .checkbox
 {
     position: absolute;
     top: 100px;
-    color: #6d1a1a;
+    color: var(--themepanel-fontcolor);
     border-radius: .85rem;
-    border: 3px solid #FFFFFF;
-    background-color: #FFFFFF;
+    border: 3px solid var(--themepanel-bordercolor);
+    background-color: var(--themepanel-bgcolor);
     width: 100px;
     height: 130px;
     padding: 10px;

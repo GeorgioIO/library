@@ -93,7 +93,14 @@ function Book(title , author , pages , readState)
 
 Book.prototype.toggleState = function()
 {
-    this.readState = true
+    if(this.readState === "Yes")
+    {
+        this.readState = "No";
+    }
+    else
+    {
+        this.readState = "Yes";
+    }
 }
 
 function addBookToLibrary(book)
@@ -116,7 +123,7 @@ function addBookToLibrary(book)
             </div>
         </div>
         <div class="footer">
-            <button>Toggle state</button>
+            <button id="toggleStatebtn" onclick="toggleState(this , event)">Toggle state</button>
             <button id="deleteBookBtn" onclick="addDeleteFunctionality(this , event)">Delete</button>
         </div>
     `
@@ -128,6 +135,7 @@ function addBookToLibrary(book)
     
 
 }
+
 function addDeleteFunctionality(btn , event)
 {
     event.preventDefault();
@@ -139,6 +147,16 @@ function addDeleteFunctionality(btn , event)
     
 }
 
+function toggleState(btn , event)
+{
+    event.preventDefault()
+    let bookParent = btn.parentElement.parentElement;
+    let bookIndex = bookParent.dataset.index;
+    myLibrary[bookIndex].toggleState();
+    const readState = bookParent.querySelector(".body .state p")
+    readState.innerHTML = `<b>Read : </b> ${myLibrary[bookIndex].readState}`
+
+}
 
 addBookBtn.addEventListener("click" , (event) => {
     event.preventDefault()
@@ -159,6 +177,7 @@ addBookBtn.addEventListener("click" , (event) => {
     }
     
     // Create book object
+    console.log(radioState)
     let book = new Book(bookTitle , bookAuthor , bookpages , radioState);
     addBookToLibrary(book);
 })

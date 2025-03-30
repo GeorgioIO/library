@@ -9,6 +9,72 @@ const themeTogglers = document.querySelectorAll(".theme-toggler");
 const addBookBtn = document.querySelector("#addBookButton");
 const mainBody = document.querySelector("main");
 
+const tempAddBtn = document.querySelector("#buttonAdd");
+
+class Library {
+    constructor()
+    {
+        this.books = this.loadBooks();
+    }
+
+    addBook(book)
+    {
+        if(!(book instanceof Book))
+        {
+            alert("Cannot add book")
+            return;
+        }
+        this.books.push(book);
+        this.saveBooks();
+    }
+
+    saveBooks()
+    {
+        localStorage.setItem("libraryBooks" , JSON.stringify(this.books));
+    }
+
+    loadBooks()
+    {
+        const storedBooks = localStorage.getItem("libraryBooks");
+        if(!storedBooks) return [];
+
+        return JSON.parse(storedBooks).map(bookData => new Book(bookData.title , bookData.author , bookData.pages , bookData.readState));
+    }
+
+    deleteBook(index)
+    {
+        this.books.splice(index , 1);
+        this.saveBooks();
+    }
+}
+
+
+class Book {
+    constructor(title , author , pages , readState)
+    {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readState = readState;
+    }
+
+    toggleReadState(){
+        console.log("hello")
+        if(this.readState === "Yes")
+        {
+            this.readState = "No";
+        }
+        else
+        {
+            this.readState = "Yes";
+        }
+    }
+}
+
+
+
+const library = new Library();
+addBookToLibrary(library.loadBooks());
 
 themeTogglers.forEach(toggler => {
     toggler.addEventListener("click", (event) => {
@@ -83,43 +149,27 @@ closePanel.addEventListener("click" , (event) => {
 
 const myLibrary = [];
 
-function Book(title , author , pages , readState)
+function addBookToLibrary(books)
 {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readState = readState;
-}
-
-Book.prototype.toggleState = function()
-{
-    if(this.readState === "Yes")
+    
+    mainBody.innerHTML = "";
+    mainBody.append(tempAddBtn);
+    let libraryLength = books.length;
+    for(let i = 0 ; i < libraryLength ; i++)
     {
-        this.readState = "No";
-    }
-    else
-    {
-        this.readState = "Yes";
-    }
-}
-
-function addBookToLibrary(book)
-{
-    myLibrary.push(book);
-    let libraryLength = myLibrary.length
-    let bookContent = `
+        let bookContent = `
         <div class="body">
             <div class="title">
-                <p>${myLibrary[libraryLength - 1].title}</p>
+                <p>${books[i].title}</p>
             </div>
             <div class="author">
-                <p>By ${myLibrary[libraryLength - 1].author}</p>
+                <p>By ${books[i].author}</p>
             </div>
             <div class="pages">
-                <p>${myLibrary[libraryLength - 1].pages} Pages</p>
+                <p>${books[i].pages} Pages</p>
             </div>
             <div class="state">
-                <p><b>Read : </b> ${myLibrary[libraryLength - 1].readState}</p>
+                <p><b>Read : </b> ${books[i].readState}</p>
             </div>
         </div>
         <div class="footer">
@@ -128,23 +178,23 @@ function addBookToLibrary(book)
         </div>
     `
     const tempDiv = document.createElement("div");
-    tempDiv.dataset.index =  myLibrary.length - 1;
+    tempDiv.dataset.index =  i;
     tempDiv.classList.add("book")
     tempDiv.innerHTML = bookContent;
     mainBody.appendChild(tempDiv);
+    }
+
     
 
 }
 
 function addDeleteFunctionality(btn , event)
 {
-    event.preventDefault();
+    event.preventDefault()
     let selectedBook = btn.parentElement.parentElement;
-    selectedBook.remove();
-    let bookIndex = selectedBook.dataset.index; 
-    myLibrary.splice(bookIndex , 1);
-    console.log(myLibrary)
-    
+    let selectedBookIndex = selectedBook.dataset.index;
+    library.deleteBook(selectedBookIndex);
+    addBookToLibrary(library.loadBooks());    
 }
 
 function toggleState(btn , event)
@@ -152,9 +202,18 @@ function toggleState(btn , event)
     event.preventDefault()
     let bookParent = btn.parentElement.parentElement;
     let bookIndex = bookParent.dataset.index;
-    myLibrary[bookIndex].toggleState();
-    const readState = bookParent.querySelector(".body .state p")
-    readState.innerHTML = `<b>Read : </b> ${myLibrary[bookIndex].readState}`
+
+    let book = library.books[bookIndex];
+    
+    if(book)
+    {
+        book.toggleReadState();
+        library.saveBooks();
+
+        const readState = bookParent.querySelector(".body .state p")
+        readState.innerHTML = `<b>Read : </b> ${book.readState}`
+    }
+    
 
 }
 
@@ -178,6 +237,12 @@ addBookBtn.addEventListener("click" , (event) => {
     
     // Create book object
     console.log(radioState)
-    let book = new Book(bookTitle , bookAuthor , bookpages , radioState);
-    addBookToLibrary(book);
+
+    // Create a book instance
+    const book = new Book(bookTitle , bookAuthor , bookpages , radioState);
+
+
+    library.addBook(book);
+    console.log(library.loadBooks())
+    addBookToLibrary(library.loadBooks());
 })
